@@ -38,14 +38,29 @@ def print_header
 end
 
 def print(students)
-  students.each do |student|
-    puts "#{student[:name]} (#{student[:cohort]}"
+  puts "Please enter the first letter, or hit return to see the full list: "
+  letter = gets.chomp
+  
+  if letter.empty?
+    
+    students.each_with_index do |student, index|
+      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]})"
+    end
+
+  else
+
+    students.each_with_index do |student, index|
+      if student[:name][0] == letter
+        puts "#{index + 1}. #{student[:name]} (#{student[:cohort]})"
+      end
+    end
   end
 end
 
 def print_footer(names)
   puts "Overall, we have #{names.count} great students"
 end
+
 # nothing happens until we call the methods
 students = input_students
 print_header
