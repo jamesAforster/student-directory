@@ -9,6 +9,7 @@ def input_students
   # while the name is empty, repeat this code
   while !name.empty? do
     # when a valid name is entered, then asks for a valid cohort
+
     puts "Please enter cohort"
     cohort = gets.chomp.to_sym
     while !cohort.empty? do
@@ -20,18 +21,16 @@ def input_students
         cohort = gets.chomp.to_sym
       end
     end
+
+    if students.length == 1
+      puts "We now have 1 student."
+    else
+      puts "We now have #{students.length} students."
+    end
+    
+  
     puts "Please enter another name, or press enter to skip. "
     name = gets.chomp
-  end
-
-
-  # if statement to display the correct grammar when displaying total student number.
-  if students.empty?
-    puts "We currently have no students."
-  elsif students.count == 1
-    puts "We now have 1 student."
-  else
-    puts "We now have #{students.length} students."
   end
 
   return students
@@ -77,10 +76,14 @@ def print(students)
 
 end
 
-
-
-def print_footer(names)
-  puts "Overall, we have #{names.count} great students"
+def print_footer(students)
+  if students.empty?
+    puts "We currently have no students."
+  elsif students.count == 1
+    puts "In total, we have 1 student."
+  else
+    puts "In total, we have #{students.length} students."
+  end
 end
 
 # nothing happens until we call the methods
