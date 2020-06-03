@@ -3,17 +3,27 @@ def input_students
   puts "To finish, just hit return twice."
   # create an empty array 
   students = []
+  cohorts = [:january, :april, :august, :november]
   # get the first name
   name = gets.chomp
-  # while the name is not empty, repeat this code
-  while !name.empty? do
-    # add the student hash to the array
-    students << {name: name, cohort: :november}
-    puts "Now we have #{students.count} students"
-    #get another name from the user
-  name = gets.chomp
+  # while the name is empty, repeat this code
+  while !name.empty? dog
+    # when a valid name is entered, then asks for a valid cohort
+    puts "Please enter cohort"
+    cohort = gets.chomp.to_sym
+    while !cohort.empty? do
+      if cohorts.include?(cohort)
+        students << {name: name, cohort: cohort}
+        cohort = ""
+      else 
+        puts "Cohort not found. Please enter a valid cohort, or press enter to skip."
+        cohort = gets.chomp.to_sym
+      end
+    end
+    puts "Please enter another name, or press enter to skip. "
+    name = gets.chomp
   end
-  #return the array of students
+  puts "Now we have #{students.count} students"
   students
 end
 
