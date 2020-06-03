@@ -17,7 +17,7 @@ def input_students
   students
 end
 
-def print_header
+def print_header 
   puts "The students of Villains Academy"
   puts "-------------"
 end
@@ -28,16 +28,21 @@ def print(students)
   
   while !letter.empty? do 
     students.each_with_index do |student, index|
+      if student[:name][0] == letter
       puts "#{index + 1}. #{student[:name]} (#{student[:cohort]})"
+      end
     end
+    puts "Please enter the first letter, or hit return to see the full list: "
+    letter = gets.chomp
   end
 
   students.each_with_index do |student, index|
-    if student[:name][0] == letter
-      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]})"
-    end
+    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]})"
   end
+
 end
+
+
 
 def print_footer(names)
   puts "Overall, we have #{names.count} great students"
