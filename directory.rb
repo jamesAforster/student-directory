@@ -1,6 +1,6 @@
 def input_students
   puts "Please enter the names of the students to enter."
-  puts "To finish, just hit return twice."
+  puts "To finish, just hit return."
   # create an empty array 
   students = []
   cohorts = [:january, :april, :august, :november]
@@ -44,45 +44,38 @@ def print_header
 end
 
 def print(students)
-  # puts "Please enter the first letter, or hit return to see the full list: "
-  # letter = gets.chomp
-  
-  # while !letter.empty? do 
-  #   students.each_with_index do |student, index|
-  #     if student[:name][0] == letter
-  #     puts "#{index + 1}. #{student[:name]} (#{student[:cohort]})"
-  #     end
-  #   end
-  #   puts "Please enter the first letter, or hit return to see the full list: "
-  #   letter = gets.chomp
-  # end
-  puts "Please enter the cohort to group by, or press enter to see the whole list."
-  view_cohort = gets.chomp.to_sym
-
-  while !view_cohort.empty? do 
-
-    students.each_with_index do |student,index|
-      if student[:cohort] == view_cohort
-        puts "#{index + 1}. #{student[:name]} (#{student[:cohort]})"
-      end
-    end
-    puts "Please enter another cohort to view, or press enter to see the whole list."
+  if students.length > 0
+    puts "Please enter the cohort to group by, or press enter to see the whole list."
     view_cohort = gets.chomp.to_sym
-  end
 
-  students.each_with_index do |student, index|
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]})"
+    while !view_cohort.empty? do 
+
+      students.each_with_index do |student,index|
+        if student[:cohort] == view_cohort
+          puts "#{index + 1}. #{student[:name]} (#{student[:cohort]})"
+        end
+      end
+      puts "Please enter another cohort to view, or press enter to see the whole list."
+      view_cohort = gets.chomp.to_sym
+    end
+
+    students.each_with_index do |student, index|
+      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]})"
+    end
+
+  else
+    puts "We do not have any students."
   end
 
 end
 
 def print_footer(students)
-  if students.empty?
-    puts "We currently have no students."
-  elsif students.count == 1
-    puts "In total, we have 1 student."
-  else
-    puts "In total, we have #{students.length} students."
+  if !students.empty?
+    if students.count == 1
+      puts "In total, we have 1 student."
+    else
+      puts "In total, we have #{students.length} students."
+    end
   end
 end
 
