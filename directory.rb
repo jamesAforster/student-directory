@@ -1,3 +1,29 @@
+def interactive_menu
+  students = []
+  loop do
+    puts "Please enter an option: "
+    puts "1. Input the students"
+    puts "2. Show the students"
+    puts "9. Exit"
+    selection = gets.chomp
+
+    case selection
+      when "1"
+        students = input_students
+      when "2"
+        print_header
+        print(students)
+        print_footer(input_students)
+      when "9"
+        exit
+      else
+        puts "Invalid selection, please try again"
+    end
+    
+  end
+end
+
+
 def input_students
   puts "Please enter the names of the students to enter."
   puts "To finish, just hit return."
@@ -37,11 +63,13 @@ def input_students
 
 end
 
+
 def print_header 
   puts "--------------------------------"
   puts "The students of Villains Academy"
   puts "--------------------------------"
 end
+
 
 def print(students)
   if students.length > 0
@@ -66,7 +94,6 @@ def print(students)
   else
     puts "We do not have any students."
   end
-
 end
 
 def print_footer(students)
@@ -80,7 +107,4 @@ def print_footer(students)
 end
 
 # nothing happens until we call the methods
-students = input_students
-print_header
-print(students)
-print_footer(students)
+interactive_menu
