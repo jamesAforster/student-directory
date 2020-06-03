@@ -23,8 +23,17 @@ def input_students
     puts "Please enter another name, or press enter to skip. "
     name = gets.chomp
   end
-  puts "Now we have #{students.count} students"
-  students
+
+
+  # if statement to display the correct grammar when displaying total student number.
+  if students.empty?
+    puts "We currently have no students."
+  elsif students.count == 1
+    puts "We now have 1 student."
+  else
+    puts "We now have #{students.length} students."
+  end
+
 end
 
 def print_header 
