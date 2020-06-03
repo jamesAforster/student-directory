@@ -34,11 +34,14 @@ def input_students
     puts "We now have #{students.length} students."
   end
 
+  return students
+
 end
 
 def print_header 
+  puts "--------------------------------"
   puts "The students of Villains Academy"
-  puts "-------------"
+  puts "--------------------------------"
 end
 
 def print(students)
@@ -56,19 +59,22 @@ def print(students)
   # end
   puts "Please enter the cohort to group by, or press enter to see the whole list."
   view_cohort = gets.chomp.to_sym
+
   while !view_cohort.empty? do 
+
     students.each_with_index do |student,index|
       if student[:cohort] == view_cohort
         puts "#{index + 1}. #{student[:name]} (#{student[:cohort]})"
       end
-      
-      "Please enter another cohort to view, or press enter to see the whole list."
-      view_cohort = gets.chomp.to_sym
     end
+    puts "Please enter another cohort to view, or press enter to see the whole list."
+    view_cohort = gets.chomp.to_sym
   end
+
   students.each_with_index do |student, index|
     puts "#{index + 1}. #{student[:name]} (#{student[:cohort]})"
   end
+
 end
 
 
