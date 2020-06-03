@@ -7,7 +7,7 @@ def input_students
   # get the first name
   name = gets.chomp
   # while the name is empty, repeat this code
-  while !name.empty? dog
+  while !name.empty? do
     # when a valid name is entered, then asks for a valid cohort
     puts "Please enter cohort"
     cohort = gets.chomp.to_sym
@@ -33,23 +33,33 @@ def print_header
 end
 
 def print(students)
-  puts "Please enter the first letter, or hit return to see the full list: "
-  letter = gets.chomp
+  # puts "Please enter the first letter, or hit return to see the full list: "
+  # letter = gets.chomp
   
-  while !letter.empty? do 
-    students.each_with_index do |student, index|
-      if student[:name][0] == letter
-      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]})"
+  # while !letter.empty? do 
+  #   students.each_with_index do |student, index|
+  #     if student[:name][0] == letter
+  #     puts "#{index + 1}. #{student[:name]} (#{student[:cohort]})"
+  #     end
+  #   end
+  #   puts "Please enter the first letter, or hit return to see the full list: "
+  #   letter = gets.chomp
+  # end
+  puts "Please enter the cohort to group by, or press enter to see the whole list."
+  view_cohort = gets.chomp.to_sym
+  while !view_cohort.empty? do 
+    students.each_with_index do |student,index|
+      if student[:cohort] == view_cohort
+        puts "#{index + 1}. #{student[:name]} (#{student[:cohort]})"
       end
+      
+      "Please enter another cohort to view, or press enter to see the whole list."
+      view_cohort = gets.chomp.to_sym
     end
-    puts "Please enter the first letter, or hit return to see the full list: "
-    letter = gets.chomp
   end
-
   students.each_with_index do |student, index|
     puts "#{index + 1}. #{student[:name]} (#{student[:cohort]})"
   end
-
 end
 
 
