@@ -7,7 +7,7 @@ def input_students
   # students = []
   cohorts = [:january, :april, :august, :november]
   # get the first name
-  name = gets.chomp
+  name = STDIN.gets.chomp
   # while the name is empty, repeat this code
   while !name.empty? do
     # when a valid name is entered, then asks for a valid cohort
@@ -19,7 +19,7 @@ def input_students
         cohort = ""
       else 
         puts "Cohort not found. Please enter a valid cohort, or press enter to skip."
-        cohort = gets.chomp.to_sym
+        cohort = STDIN.gets.chomp.to_sym
       end
     end
       if @students.length == 1
@@ -36,7 +36,7 @@ end
 def interactive_menu
   loop do
     print_menu
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
   end
 end
 
@@ -64,7 +64,7 @@ def process(selection)
     when "3"
       save_students
     when "4"
-      load_students
+      try_load_students
     when "9"
       exit
     else
@@ -128,8 +128,8 @@ def save_students
   file.close
 end
 
-def load_students
-  file = File.open("students.csv","r")
+def load_students(filename = "students.csv")
+  file = File.open(filename,"r")
   file.readlines.each do |line|
   name, cohort = line.chomp.split(',')
     @students << {name: name, cohort: cohort.to_sym}
@@ -137,5 +137,18 @@ def load_students
   file.close
 end
 
+def try_load_students
+  filename = ARGV.first
+  return if filename.nil?
+  if File.exists?(filename)
+    load_students(filename)
+    puts "Loaded #{@students.count} from #{filename}"
+  else
+    puts "Sorry, #{filename} doesn't exist."
+    exit 
+  end
+end
+
 # nothing happens until we call the methods
+load_students
 interactive_menu
